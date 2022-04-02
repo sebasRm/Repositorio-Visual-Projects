@@ -6,8 +6,8 @@ import fondoLogin from "../assets/img/fondoLogin.jpg"
 import LogoVisual from "../assets/img/logo.png"
 
 import { Fragment } from 'react/cjs/react.production.min';
-import MenuCoordinador from './MenuCoordinador';
-import {BrowserRouter as Router,Switch, Route} from 'react-router-dom'
+
+
 
 
 const validarUsuario = async()=>
@@ -18,8 +18,7 @@ const validarUsuario = async()=>
    
     if(rol=='Coordinador')
     {
-        window.location.href="/MenuCoordinador"; 
-        
+        window.location.href="/MenuCoordinador";    
     }
     else
     {
@@ -37,11 +36,8 @@ const enviarDatos = async (usuario,contrasena)=>
             formData.append('usuario', usuario);
             formData.append('contrasena',contrasena);
             const res = await axios.post('http://localhost/Apis/login.php',formData).then((resJson)=>{
-                return resJson.data;
-               
+                return resJson.data;    
             }); 
-           
-           
             return res;   
         }
         catch(error)
@@ -52,7 +48,7 @@ const enviarDatos = async (usuario,contrasena)=>
 
 
 
-export default function Sesion ()
+export const Sesion =()=>
 {
     
     const reftUsuario = useRef(null);
@@ -92,13 +88,13 @@ export default function Sesion ()
             <img src={fondoLogin} className="fondoLogin"/>
        </div>
 
-       <div className="container-fluid">
+      <div className="container-fluid">
       <div className="row align-items-center justify-content-center center-block minh-100 ">
        <div className="col-xs-6 col-sm-6  col-md-6 col-lg-4 ">
      
             <div className="card text-white bg-secondary">
                 <div className="card-header text-center ">
-                     <img src={LogoVisual} className="logo img-fluid mx-auto d-block"/>
+                     <img src={LogoVisual} className="logoVisual img-fluid mx-auto d-block"/>
                      <h2 className="card-title">Ingresar a Suite de dirección de proyectos</h2>  
                 </div>
 

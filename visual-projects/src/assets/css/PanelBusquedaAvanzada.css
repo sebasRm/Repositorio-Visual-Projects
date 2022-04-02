@@ -1,0 +1,92 @@
+
+.btn-busqueda
+{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 300px;
+  border-color: aliceblue;
+ background-color: transparent;
+ margin-top: 0.5rem;
+ color: aliceblue;
+ 
+}
+
+.btn-busqueda input[type="text"] {
+  background-color: white;
+  border: 0;
+  outline: none;
+  height: 25px;
+  width: 250px;
+  border-radius: 5px;
+  display: block;
+  margin: 20px 0;
+  padding: 0 40px;
+}
+  .busqueda
+  {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 300px;
+    border-color: aliceblue;
+   background-color: transparent;
+   margin-top: 0.2rem;
+   color: rgb(8, 8, 8);
+   margin-left: 15rem;
+  }
+
+  .extension{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 180px;
+  
+  }
+  .Dropdown{
+    background-color: transparent;
+    border:0;
+    margin-bottom: 1rem;
+    margin-left: 0.4rem;
+  }
+  .toggleFechas{
+    background-color: transparent;
+    border:0;
+    margin-right: 2rem;
+  }
+.container{
+  margin-right: 15rem;
+}
+.container-fluid{
+  height:50px;
+  background-color: rgb(58, 103, 248);
+}
+.btn-busqueda .icono{
+ 
+  position: absolute;
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  color: rgb(124, 122, 122);
+  margin-top: 1%;
+  transform: translateY(-50%);
+}
+#input_id::placeholder {
+  color:white;
+}
+::placeholder { color: rgb(15, 15, 15); }
+
+
+.iconoFacultades{
+  margin-left: 2.5rem;
+  max-width: 90px;
+}
+.toggle{
+  background: transparent;
+}
+.botonBuscar{
+  margin-bottom: 10rem;
+}
+.divider{
+  border-right: 1px dashed #333;
+}
