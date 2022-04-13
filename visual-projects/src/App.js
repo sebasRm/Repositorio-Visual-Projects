@@ -3,13 +3,13 @@ import React,{  } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {Sesion} from './components/Sesion';
 import {MenuCoordinador} from './components/Home/MenuCoordinador';
-import MenuLider from './components/MenuLider';
+import {MenuLider} from './components/Home/MenuLider';
 import CerrarSesion from './components/Navbar/CerrarSesion';
 import {PanelBusquedaAvanzada} from './components/PanelBusquedaAvanzada';
 import './assets/css/App.css';
 import { Provider, useSelector } from "react-redux";
 import { MsalProvider } from '@azure/msal-react';
-import {Directores} from './components/Directores';
+import {Lideres} from './components/Lideres';
 import {CrearProyectos} from'./components/CrearProyectos'
 import { EdicionProyectos } from './components/EdicionProyectos';
 
@@ -27,7 +27,7 @@ function App(){
             <Route path="/MenuLider" exact component={MenuLider}/> 
             <Route path="/CerrarSesion" exact component={CerrarSesion}/>   
             <Route path="/PanelBusquedaAvanzada" exact component={PanelBusquedaAvanzada}/>   
-            <Route path="/Directores" exact component={Directores}/>   
+            <Route path="/Lideres" exact component={Lideres}/>   
             <Route path="/CrearProyectos" exact component={CrearProyectos}/> 
             <Route path="/EdicionProyectos" exact component={EdicionProyectos}/> 
            

@@ -4,12 +4,11 @@ import { Modal, ModalHeader, FormGroup } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
     closeModalEditarLider,
-    actualizarVistaLideres,
     actualizar,  
 } from "../../actions/events";
 import { useState } from "react";
 import axios from 'axios'
-
+import Swal from "sweetalert2"
 
  export const ModalEditarLider = () =>{
     const dispatch = useDispatch();
@@ -38,7 +37,13 @@ import axios from 'axios'
             formData.append('correo',correo);
             const res =await axios.post('http://localhost/Apis/editar_lider.php',formData);
             console.log(res.data);
+            Swal.fire(
+                "Listo",
+                "Se han modificado exitosamente los cambios",
+                "success"
+              );
             return res;   
+      
          
         }
         catch(error)

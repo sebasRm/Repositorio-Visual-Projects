@@ -9,7 +9,7 @@ import {
 } from "../../actions/events";
 import { useState } from "react";
 import axios from 'axios'
-
+import Swal from "sweetalert2"
 
  export const ModalRegistrarDirector = () =>{
     const dispatch = useDispatch();
@@ -65,7 +65,11 @@ import axios from 'axios'
             formData.append('correo',correo);
             axios.post('http://localhost/Apis/usuario.php',formData);
             console.log(formData.values);
-           
+            Swal.fire(
+                "Listo",
+                "Se ha Registrado con exito el lider ",
+                "success"
+              );  
         }
         catch(error)
         {

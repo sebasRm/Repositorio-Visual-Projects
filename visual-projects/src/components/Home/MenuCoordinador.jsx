@@ -14,8 +14,14 @@ import "../../assets/css/Menu.css"
 import direccionProyectos from "../../assets/img/direccionProyectos.png";
 import { FaUserTie } from "react-icons/fa"
 import { MdCreateNewFolder } from "react-icons/md"
+import {Link} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+  gestorObjProyecto 
+} from "../../actions/events";
 export const MenuCoordinador =()=>{
+  const dispatch = useDispatch();
  // const navigate = useNavigate();
     const breakpoint = [
       {width:1,itemsToShow:1},
@@ -25,7 +31,7 @@ export const MenuCoordinador =()=>{
       
     ]
 
-    
+    const [idLiderProyecto, setIdLiderProyecto] = useState([])
        
     function handleCrearProyectos()
     {
@@ -33,29 +39,32 @@ export const MenuCoordinador =()=>{
       window.location.href="/CrearProyectos";
     }
     function handleDirectores(){
-      window.location.href="/Directores"; 
+      window.location.href="/Lideres"; 
     }
 
         const consultarProyectos =async()=>
         {
-            try
-            {
-                var formData = new FormData();
-                formData.append('buscarProyectoTodos', '');
-                const res = await axios.post('http://localhost/Apis/proyectos.php',formData).then((resJson)=>{
-                    console.log(resJson.data)
-                    return resJson.data.datos;    
-                }); 
-                sessionStorage.setItem('proyectos', JSON.stringify(res));
-             
-                
-                return res;   
-            }
-            catch(error)
-            {
-                console.error(error);
-            }       
+          
+          var formData = new FormData();
+          formData.append('buscarProyectoTodos', '');
+          const res = await axios.post
+          (
+            'http://localhost/Apis/proyectos.php',formData
+          ).then((resJson)=>
+          {
+            setIdLiderProyecto(resJson.data.datos.idLider_proyecto)
+            dispatch(gestorObjProyecto(resJson.data.datos))
+            console.log(resJson.data.datos)
+            return resJson.data.datos;    
+          }).catch((error)=>
+          {
+              console.error(error);
+          }); 
+          sessionStorage.setItem('proyectos', JSON.stringify(res));
+          return res;   
+
         }
+
         consultarProyectos()
         let proyectos =JSON.parse(sessionStorage.getItem('proyectos'));
          console.log(proyectos)
@@ -78,6 +87,7 @@ export const MenuCoordinador =()=>{
                   <div className="col-xs-12 col-sm-12  col-md-6 col-lg-3"></div>
                   
                 <div className="col-xs-12 col-sm-12  col-md-6 col-lg-4"  style={{marginTop:'2rem'}}>
+                       
                         <button className="botonBuscar"
                         type="button" class="btn " 
                         style={{marginTop:'0.5rem',background:'rgb(63, 62, 62)', color:'white'}}
@@ -87,6 +97,7 @@ export const MenuCoordinador =()=>{
                           <FaUserTie/>
                         Lideres de proyectos
                         </button>
+                    
                         </div>
 
                         <div className="col-xs-12 col-sm-12  col-md-6 col-lg-4" style={{marginTop:'2rem'}}>
@@ -106,7 +117,7 @@ export const MenuCoordinador =()=>{
                           </div>
 
                           <div className="col-xs-12 col-sm-12  col-md-12 col-lg-2">
-                          <h3 style={{color:'#757579',marginTop:'1rem'}}>{usuario.map(usuario => <div>{usuario.nombres+" "}{usuario.apellidos}</div>,)} </h3>
+                          <h3 style={{color:'#757579',marginTop:'1rem'}}>{usuario.nombres+" "}{usuario.apellidos}</h3>
                           </div>
                 </div>
 
@@ -139,11 +150,13 @@ export const MenuCoordinador =()=>{
                                             presupuesto={proyecto.presupuesto}
                                             indicadorCPI={proyecto.indicador_cpi}
                                             indicadorSPI={proyecto.indicador_spi}
+                                            idProyecto={proyecto.idProyecto}
+                                            idLider={proyecto.idLider_proyecto}
                                             
                                             />
                                     </div>
                                 ))):  (console.log("no hay proyectos"))  
-                            }     
+                      }     
                   </Carousel>
                     
                 </div>

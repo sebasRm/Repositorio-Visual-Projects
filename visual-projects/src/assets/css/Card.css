@@ -20,12 +20,16 @@
 .card-head{
     background-color: #163bdd;
 }
-.card-body{
+.cuerpo-card{
     background-color: #d3dafa;
 
 }
 .card-footer
 {
     background: #acb7eb;
+}
+.divider{
+    width: 10rem;
+    height: 2rem;
 }
   

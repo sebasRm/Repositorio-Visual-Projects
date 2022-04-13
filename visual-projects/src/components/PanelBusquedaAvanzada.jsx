@@ -34,69 +34,52 @@ export const PanelBusquedaAvanzada = () => {
   const toggelDropdownDos =()=>{
     setDropdownDos(!dropdownDos);
   }
-
-
+  const [facultad, setFacultad] = useState([])
+  const [progama, setPrograma] = useState([])
+  console.log(facultad)
 const consutaTipo= async()=> 
 {
-    try
-    {
         var formData = new FormData();
         formData.append('consultasTipo', '');
-        const res = await axios.post('http://localhost/Apis/proyectos.php',formData).then((resJson)=>{
-          console.log(resJson.data)
-          return resJson.data.datos;    
-      }); 
-      sessionStorage.setItem('facultades', JSON.stringify(res));
-      return res;   
-         
-    }
-    catch(error)
-    {
-        console.error(error);
-    }       
+        const res = await axios.post(
+          'http://localhost/Apis/proyectos.php',
+          formData
+          )
+          .then((resJson)=>
+          {  
+          setFacultad(resJson.data.datos)
+      }).catch((error)=>
+      {
+          console.error(error);
+      });
+  
 }
 consutaTipo();
 
-let facultades =JSON.parse(sessionStorage.getItem('facultades')); 
-console.log(facultades);
-const consutaProgramas= async()=> 
-{
-    try
-    {       
-        var formData = new FormData();
-        formData.append('consultasProgramas',respuesta);
-        const res = await axios.post('http://localhost/Apis/proyectos.php',formData).then((resJson)=>{
-          console.log(resJson.data)
-          return resJson.data.datos;    
-      }); 
-      sessionStorage.setItem('programas', JSON.stringify(res));
-      return res;   
-         
-    }
-    catch(error)
-    {
-        console.error(error);
-    }       
-}
-let programas =JSON.parse(sessionStorage.getItem('programas'));
-console.log(programas);
 
-const handleUp = (e, b) => {
-  if (e.target.innerHTML.includes("div.dropdown-menu.show" || "dropdown")) return;
-  setInfoCursor(e.target.innerHTML); 
-  let obj = [];
-  console.log(e.target.innerHTML);
-  findAllObject(facultades, "nombre", e.target.innerHTML, obj);
-  respuesta=obj[0].idFacultad;
-  dispatch(gestionAddFacultades(obj));
-  console.log(respuesta);
-  consutaProgramas();
+
+const consutaProgramas= async(idFacultad)=> 
+{
+   var formData = new FormData();
+        formData.append('consultasProgramas',idFacultad);
+        await axios.post
+        (
+          'http://localhost/Apis/proyectos.php',
+          formData
+        ).then((resJson)=>
+        {
+          console.log(resJson.data)
+          setPrograma(resJson.data.datos);    
+        }).catch((error)=>
+        {
+            console.error(error);
+        });      
 }
 
   return (
    
     <>
-    <div className="container-fluid">
+    <div className=" container-fluid" style={{backgroundColor:'#6895f8',  height:'50px'}}>
     <div className="row  justify-content-center">
           <div className="col-xs-12 col-sm-12  col-md-12 col-lg-8">
             <div className="row">
@@ -142,20 +125,19 @@ const handleUp = (e, b) => {
                         
                                 <Dropdown  isOpen={dropdownDos} toggle={toggelDropdownDos}>
                                   {
-                                    facultades ?  facultades.map(facultades =>
+                                    facultad ?  facultad.map(facultad =>
                                         <div >
-                        
                                             <DropdownToggle style={{background:'transparent', color:'black', border:0}}>
-                                            <div onMouseOver={(e) => handleUp(e)}>
-                                            {facultades.nombre}
+                                            <div onMouseOver={(e) => consutaProgramas( facultad.idFacultad )} >
+                                            {facultad.nombreFacultad}
                                             </div>
                                             </DropdownToggle>
                                             {
-                                              programas  ? (     <DropdownMenu>
+                                              progama  ? (<DropdownMenu>
                                                 {
-                                                  programas.map(programa => <div>
-                                                  <DropdownItem>
-                                                {programa.nombre_programa}
+                                                  progama.map(progama => <div>
+                                                  <DropdownItem respuesta={facultad.idFacultad}>
+                                                {progama.nombre_programa}
                                                 </DropdownItem>
                                                   </div>)
                                                 } 

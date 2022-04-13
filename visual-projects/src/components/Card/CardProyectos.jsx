@@ -8,25 +8,54 @@ import { BsFillBarChartLineFill } from "react-icons/bs"
 import { GrMoney } from "react-icons/gr"
 import { GiProgression } from "react-icons/gi"
 import { BsFileBarGraph } from "react-icons/bs"
-
-
+import { RiUserAddLine } from "react-icons/ri"
+import {ModalAsignarLider} from "../Modal/ModalAsignarLider"
+import { useDispatch, useSelector } from "react-redux";
+import {
+   gestorProyecto,
+   gestorIDProyecto,
+   gestorIDLider,
+   openModalAsignarLider,
+   closeNavbar,
+   consultarProyecto,
+} from "../../actions/events";
 
 const CardProyectos=(props)=> {
-
+   const dispatch = useDispatch();
   
 
-let indicadores =JSON.parse(sessionStorage.getItem('indicadores'));
 function handleEdicion()
     {
-      window.location.href="/EdicionProyectos";
+    dispatch(consultarProyecto(props.title))
+      dispatch(gestorProyecto(props.title));
+      dispatch(gestorIDProyecto(props.idProyecto));
+      dispatch(gestorIDLider(props.idLider));
     }
+
+    function handleAgregarLider()
+    {
+      dispatch(closeNavbar());
+      dispatch(openModalAsignarLider());
+    }
+   
         return(
+       
              <div className="card card-proyectos text-center" onClick={handleEdicion}>
                  <div className='card-head'>
-                 <p className="titulo" style={{marginTop:'1rem'}}>Nombre proyecto: {props.title}</p>
+                    <div className="row">
+                        <div className='col-xs-12 col-sm-12  col-md-12 col-lg-2'>
+                           {
+                              props.idLider===null&&<button onClick={handleAgregarLider} style={{background:'transparent',border:'0'}}><RiUserAddLine style={{color:'black'}}/></button>
+                           }
+                        </div>
+                        <div className='col-xs-12 col-sm-12  col-md-12 col-lg-10 text-center'>
+                        <p className="titulo" style={{marginTop:'1rem'}}>Nombre proyecto: {props.title}</p>
+                        </div>
+                    </div>
+                 
                  </div>
-                
-                 <div className="card-body" >
+                 <Link to="/EdicionProyectos" style={{ textDecoration: 'none' }}>
+                 <div className="card-body cuerpo-card" >
                
                  
                  <div className='row'>
@@ -52,9 +81,12 @@ function handleEdicion()
              
                </div> 
                 </div>
+                </Link>
 
-               
-             </div>)
+               <ModalAsignarLider/>
+             </div>
+         
+             )
     }
 
 export default CardProyectos

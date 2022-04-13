@@ -4,6 +4,9 @@ const initialState ={
     tiposFacultades:[],
     lideres:[],
     proyecto:[],
+    objProyectos:[],
+    Proyecto:[],
+
  
 };
 
@@ -13,7 +16,26 @@ export const eventsReducer = (state=initialState, action)=>{
         case types.gestionAddFacultades:
             return{
                 ... state,
-                tiposFacultades:[...state.tiposFacultades, action.payload]
+                tiposFacultades: action.payload
+         };
+         
+         case types.gestionProductos:
+            return{
+                ... state,
+                productos: action.payload
+         };
+
+         case types.gestionObjProyecto:
+            
+            return{
+                ... state,
+                objProyectos:action.payload
+         };
+
+         case types.gestionProyecto:
+            return{
+                ... state,
+                Proyecto:action.payload
          };
  
         case types.gestionDeletedFacultades:
@@ -68,23 +90,43 @@ export const eventsReducer = (state=initialState, action)=>{
                lideres:action.payload,
         };
 
-        case types. gestionProyecto:
+        case types. gestionProyectoNombre:
             console.log(action.payload)
         return{
             ... state,
-            nombreProyecto:true,
+            nombreProyecto:action.payload,
      };
 
-     case types. nombreProyecto:
+     case types. gestionIdProyecto:
             console.log(action.payload)
         return{
             ... state,
-            proyecto:[...state.proyecto, action.payload],
+            proyecto: action.payload,
      };
 
+     case types. gestionIdLider:
+            console.log(action.payload)
+        return{
+            ... state,
+            idLider: action.payload,
+     };
 
+     case types.uiOpenModalAsignarLider:
+            return{
+                ... state,
+                modalAsignarLider:true,
+         };
 
-
+         case types.uiCloseModalAsignarLider:
+            return{
+                ... state,
+                modalAsignarLider:false,
+         };
+     case types.uiCloseNavbar:
+         return{
+            ... state,
+            closeNavbar:true,
+     };
 
         default:
         return state;

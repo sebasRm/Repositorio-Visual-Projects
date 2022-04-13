@@ -52,13 +52,14 @@ import { render } from "@testing-library/react";
 
          
       <Dropdown  isOpen={dropdown} toggle={toggelDropdown}>
-           <DropdownToggle style={{background:'#0b2dc4', border:0, width:'12rem'}} className="dropdown_user" >
+           <DropdownToggle style={{background:'#0b2dc4', border:0, width:'15rem'}} className="dropdown_user" >
             <div className="row">
                
-           <div className="col-xs-12 col-sm-12  col-md-12 col-lg-4">
-           {usuario.map(usuario => <div>{usuario.nombres+" "}{usuario.apellidos}</div>,)} 
-           </div>
-           <div className="col-xs-12 col-sm-12  col-md-12 col-lg-3">
+           <div className="col-xs-12 col-sm-12  col-md-12 col-lg-6">
+             {usuario.nombres+" "}{usuario.apellidos} 
+           </div> 
+       
+           <div className="col-xs-12 col-sm-12  col-md-12 col-lg-2">
            <img className="usuario" src={iconoUsuario} alt="user"/>
           
            </div> 
@@ -69,14 +70,14 @@ import { render } from "@testing-library/react";
                 Perfil usuario
                 </DropdownItem>
                 <DropdownItem>
-                Nombres:{usuario.map(usuario => <div>{usuario.nombres+" "}{usuario.apellidos}</div>,)} 
+                Nombres:{usuario.nombres+" "}{usuario.apellidos} 
                 </DropdownItem>
                 <DropdownItem>
-                Correo:{usuario.map(usuario => <div>{usuario.correo}</div>)}    
+                Correo:{usuario.correo}  
                 </DropdownItem>
 
                 <DropdownItem>
-                Rol:{usuario.map(usuario => <div>{usuario.rol}</div>)}    
+                Rol:{usuario.rol} 
                 </DropdownItem> 
 
                 <DropdownItem>

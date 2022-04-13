@@ -1,51 +1,49 @@
-import React,{useRef} from 'react';
+import React,{useRef, useState} from 'react';
 import axios from 'axios'
-
-import '../assets/css/Sesion.css';
+import "../assets/css/Sesion.css"
 import fondoLogin from "../assets/img/fondoLogin.jpg"
 import LogoVisual from "../assets/img/logo.png"
-
 import { Fragment } from 'react/cjs/react.production.min';
 
-
-
-
-const validarUsuario = async()=>
+const validarUsuario = (usuario)=>
 {
-    var rol=null;
-    let usuarios =JSON.parse(sessionStorage.getItem('usuarioActivo'));
-    usuarios.map(usuarios=><div>{rol=usuarios.rol}</div>)
-   
-    if(rol=='Coordinador')
+    if(usuario)
     {
-        window.location.href="/MenuCoordinador";    
-    }
-    else
-    {
-        window.location.href="/MenuLider"; 
-    }
-    console.log(rol)
-}
-
-
-const enviarDatos = async (usuario,contrasena)=>
- {
-        try
+        if(usuario.idLider_proyecto)
         {
-            var formData = new FormData();
-            formData.append('usuario', usuario);
-            formData.append('contrasena',contrasena);
-            const res = await axios.post('http://localhost/Apis/login.php',formData).then((resJson)=>{
-                return resJson.data;    
-            }); 
-            return res;   
+            window.location.href="/MenuLider"; 
         }
-        catch(error)
+        else if(usuario.idCoordinadora_gestion)
         {
-            console.error(error);
-        }       
+            window.location.href="/MenuCoordinador";    
+        }
+    }
+    else{
+        alert("no existe el usuario con ese correo");
+    }
 }
 
+
+const enviarDatos = async(usuario,contrasena)=>
+{
+    var formData = new FormData();
+    formData.append('usuario', usuario);
+    formData.append('contrasena',contrasena);
+    await axios.post
+    (
+        'http://localhost/Apis/login.php',
+        formData
+    ).then((resJson)=>
+    {
+        let usuario=resJson.data.datos[0];
+        sessionStorage.setItem('usuarioActivo', JSON.stringify(usuario));
+        validarUsuario(usuario)
+            
+    }).catch((error)=>
+    {
+        console.error(error);
+    });      
+}
 
 
 export const Sesion =()=>
@@ -65,22 +63,9 @@ export const Sesion =()=>
            }
            else
            {
-             const resJson= await enviarDatos(usuario,contrasena); 
-            if(resJson.conectado == false)
-            {
-                alert("Usuario o contraseña incorrectas")
-            }
-            else
-            {
-                var res=resJson.datos
-                sessionStorage.setItem('usuarioActivo', JSON.stringify(res));
-               validarUsuario()
-
-            }
+            enviarDatos(usuario,contrasena)
         }
     }
-
-
 
     return(
       <Fragment>
