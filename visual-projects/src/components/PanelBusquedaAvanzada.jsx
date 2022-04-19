@@ -61,7 +61,8 @@ consutaTipo();
 const consutaProgramas= async(idFacultad)=> 
 {
    var formData = new FormData();
-        formData.append('consultasProgramas',idFacultad);
+        formData.append('consultasProgramas',"1");
+        formData.append('idFacultad',idFacultad);
         await axios.post
         (
           'http://localhost/Apis/proyectos.php',

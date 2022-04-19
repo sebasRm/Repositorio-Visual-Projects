@@ -21,11 +21,11 @@ import { CardMetas } from "./Card/CardMetas";
 import { CardCronograma } from "./Card/CardCronograma";
 export const EdicionProyectos =()=>{
     const dispatch = useDispatch();
-    const { nombreProyecto,idLider,Proyecto}  = useSelector((state) => state);
+    const { nombreProyecto,idLider,objProyectos}  = useSelector((state) => state);
    // !nombreProyecto?( <Route to="/MenuLider"/>):( <Route to="/EdicionProyectos"/>)
-  
+   //console.log(objProyectos)
     const [proyectoLider, setProyectoLider] = useState([]);
-   dispatch(consutarProductos(Proyecto.idProyecto))
+   dispatch(consutarProductos(objProyectos?.idProyecto))
 
   
     
@@ -52,11 +52,11 @@ export const EdicionProyectos =()=>{
                                 <h4 style={{color:'#757579'}}>{nombreProyecto}</h4>
                                 </div>
                             </div>
-                            <div className="row">
+                            <div className="row" style={{zIndex:1}}>
                                 <CardTipoProyecto/>     
                            </div> 
 
-                         <div className="row" style={{marginTop:'1rem'}}>
+                         <div className="row" style={{marginTop:'1rem',zIndex:-1}}>
                                <CardPlaneacion/> 
                          </div> 
                          
@@ -73,6 +73,7 @@ export const EdicionProyectos =()=>{
                     </div>
                     <div className='col-xs-12 col-sm-12  col-md-12 col-lg-3'>
                         <div className="row">
+                           
                         {
                             idLider ? (
                                 <div className='col-xs-12 col-sm-12  col-md-12 col-lg-12'>      
@@ -83,17 +84,17 @@ export const EdicionProyectos =()=>{
                                     <div className="card-body" style={{background:'rgb(63, 62, 62)', color:'white'}}>
                                         <FaUserTie/>
                                         <h8> 
-                                        {Proyecto.nombres}{Proyecto.apellidos}
+                                        {objProyectos&&objProyectos[0].nombres}{objProyectos&&objProyectos[0].apellidos}
                                         </h8>
                                         <br/>
                                         <AiOutlineMail/>
                                         <h8>  
-                                        {Proyecto.correo}
+                                        {objProyectos&&objProyectos[0].correo}
                                         </h8>
                                         <br/>
                                         <BsTelephoneMinus/>
                                         <h8>  
-                                        {Proyecto.telefono}
+                                        {objProyectos&&objProyectos[0].telefono}
                                         </h8>
                                        
                                     </div>

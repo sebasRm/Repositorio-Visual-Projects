@@ -32,4 +32,11 @@
     width: 10rem;
     height: 2rem;
 }
-  
+
+.cardPlaneacion{
+    width: 30rem;
+    z-index: 0;
+}
+.dropdown-card-tipo{
+    z-index: 1;
+}

@@ -41,7 +41,7 @@ export const CrearProyectos=() =>{
                 const res= await axios.post('http://localhost/Apis/validar_proyecto.php',formData).then((resJson)=>{
                     return resJson.data;    
                 }); 
-                console.log(res)
+                //console.log(res)
                 if(res.datos.length>0){
                   
                     Swal.fire(
@@ -73,7 +73,7 @@ export const CrearProyectos=() =>{
 
       const handleCrearProyecto =async()=>
       {
-          console.log(nombreProyecto)
+          //console.log(nombreProyecto)
           dispatch(gestorProyecto(nombreProyecto ))
           if(nombreProyecto)
           {
@@ -82,7 +82,7 @@ export const CrearProyectos=() =>{
                 var formData = new FormData();
                 formData.append('nombres',nombreProyecto);
                 axios.post('http://localhost/Apis/crear_proyecto.php',formData);
-                console.log(formData.values);
+             //  console.log(formData.values);
 
                 Swal.fire(
                     "Listo",

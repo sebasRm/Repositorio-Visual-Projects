@@ -6,12 +6,39 @@ const initialState ={
     proyecto:[],
     objProyectos:[],
     Proyecto:[],
+    programas:[],
 
  
 };
 
 export const eventsReducer = (state=initialState, action)=>{
     switch(action.type){
+        
+        case types.gestionProducto:
+            return{
+                ... state,
+                producto: action.payload
+         };
+
+        case types.gestionPrograma:
+            return{
+                ... state,
+                programas: action.payload
+         };
+
+        
+        case types.gestionAddProgramas:
+            return{
+                ... state,
+                programas: action.payload
+         };
+
+         case types. gestionAddNombreFacultad:
+             console.log(action.payload)
+            return{
+                ... state,
+                nombreFacultad: action.payload
+         };
 
         case types.gestionAddFacultades:
             return{
@@ -20,6 +47,7 @@ export const eventsReducer = (state=initialState, action)=>{
          };
          
          case types.gestionProductos:
+            console.log(action.payload)
             return{
                 ... state,
                 productos: action.payload
