@@ -3,7 +3,7 @@ import CardProyectos from '../Card/CardProyectos';
 //import { useNavigate } from "react-router-dom";
 //import { useNavigate } from 'react-router-dom';
 import { Fragment } from "react";
-import React, {useState,Component} from 'react'; 
+import React, {useState,useEffect} from 'react'; 
 import '../../assets/css/Menu.css';
 import axios from 'axios'
 import Navbar from '../Navbar/NavBar'
@@ -17,11 +17,19 @@ import { MdCreateNewFolder } from "react-icons/md"
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 
+
+
 import {
-  gestorObjProyecto 
+  consultarProyectos 
 } from "../../actions/events";
+
 export const MenuCoordinador =()=>{
+
+  const { proyectos}  = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  !proyectos && dispatch(consultarProyectos());
+
  // const navigate = useNavigate();
     const breakpoint = [
       {width:1,itemsToShow:1},
@@ -32,7 +40,7 @@ export const MenuCoordinador =()=>{
     ]
 
     const [idLiderProyecto, setIdLiderProyecto] = useState([])
-       
+    
     function handleCrearProyectos()
     {
       //navigate("/CrearProyectos")
@@ -41,33 +49,12 @@ export const MenuCoordinador =()=>{
     function handleDirectores(){
       window.location.href="/Lideres"; 
     }
+    console.log(proyectos)
 
-        const consultarProyectos =async()=>
-        {
-          
-          var formData = new FormData();
-          formData.append('buscarProyectoTodos', '');
-          const res = await axios.post
-          (
-            'http://localhost/Apis/proyectos.php',formData
-          ).then((resJson)=>
-          {
-            setIdLiderProyecto(resJson.data.datos.idLider_proyecto)
-            dispatch(gestorObjProyecto(resJson.data.datos))
-            console.log(resJson.data.datos)
-            return resJson.data.datos;    
-          }).catch((error)=>
-          {
-              console.error(error);
-          }); 
-          sessionStorage.setItem('proyectos', JSON.stringify(res));
-          return res;   
 
-        }
 
-        consultarProyectos()
-        let proyectos =JSON.parse(sessionStorage.getItem('proyectos'));
-         console.log(proyectos)
+
+        // console.log(proyectos)
         let usuario =JSON.parse(sessionStorage.getItem('usuarioActivo'));
           console.log(usuario.nombres)
         return(  
@@ -138,7 +125,7 @@ export const MenuCoordinador =()=>{
                   style={{marginTop:'5%'}}
                   
                   >
-                      {
+                     {
                              proyectos ?  
                              (proyectos.map(proyecto =>(
                                     <div className="col-xs-12 col-sm-12  col-md-12 col-lg-4" key={proyecto.idActividades}>{

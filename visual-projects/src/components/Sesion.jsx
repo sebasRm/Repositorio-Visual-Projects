@@ -7,6 +7,7 @@ import { Fragment } from 'react/cjs/react.production.min';
 
 const validarUsuario = (usuario)=>
 {
+    
     if(usuario)
     {
         if(usuario.idLider_proyecto)
@@ -15,8 +16,10 @@ const validarUsuario = (usuario)=>
         }
         else if(usuario.idCoordinadora_gestion)
         {
-            window.location.href="/MenuCoordinador";    
+            window.location.href="/MenuCoordinador";   
+            
         }
+        sessionStorage.setItem('usuarioActivo', JSON.stringify(usuario));
     }
     else{
         alert("no existe el usuario con ese correo");
@@ -35,8 +38,8 @@ const enviarDatos = async(usuario,contrasena)=>
         formData
     ).then((resJson)=>
     {
+        console.log(resJson);
         let usuario=resJson.data.datos[0];
-        sessionStorage.setItem('usuarioActivo', JSON.stringify(usuario));
         validarUsuario(usuario)
             
     }).catch((error)=>

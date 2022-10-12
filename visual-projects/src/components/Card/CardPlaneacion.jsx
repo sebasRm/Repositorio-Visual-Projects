@@ -18,9 +18,10 @@ export const CardPlaneacion=()=>{
       presupuesto:"",
    
     };
-  console.log(objProyectos)
+  //console.log(objProyectos)
   const [formValues, setformValues] = useState(initiEvent);
   const { objetivo,presupuesto } = formValues;
+  
   useEffect(() => {
     if (objProyectos) {
       setformValues({
@@ -31,6 +32,8 @@ export const CardPlaneacion=()=>{
       setformValues(initiEvent);
     }
   }, [objProyectos, setformValues]);
+
+
   const handleInputChange = ({ target }) => {
     setformValues({
       ...formValues,
@@ -62,6 +65,8 @@ return(
                                   aria-label="Username"
                                   aria-describedby="basic-addon1"
                                   placeholder="Objetivo del proyecto"
+                                  size="40"
+                                  maxlength="40"
                               />
                               </div>
                       </div>

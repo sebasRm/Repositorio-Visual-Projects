@@ -18,18 +18,20 @@ import {
    openModalAsignarLider,
    closeNavbar,
    consultarProyecto,
+   consultarMetas
 } from "../../actions/events";
 
 const CardProyectos=(props)=> {
    const dispatch = useDispatch();
-  
+   const { objProyectos}  = useSelector((state) => state);
 
 function handleEdicion()
     {
-    dispatch(consultarProyecto(props.title))
+ /*   dispatch(consultarProyecto(props.title))
       dispatch(gestorProyecto(props.title));
       dispatch(gestorIDProyecto(props.idProyecto));
       dispatch(gestorIDLider(props.idLider));
+     */
     }
 
     function handleAgregarLider()

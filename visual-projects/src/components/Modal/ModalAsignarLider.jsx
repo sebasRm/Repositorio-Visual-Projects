@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, ModalHeader, FormGroup } from "reactstrap";
-import {Lideres} from "../Lideres"
+import { LideresCard } from "../Card/LideresCard";
 import Swal from "sweetalert2"
 import {
     openCloseAsignarLider,
@@ -35,7 +35,7 @@ export const ModalAsignarLider=()=>{
                     Asignar Lider de proyecto
                 </ModalHeader>
                 <FormGroup>
-                   <Lideres/>
+                   <LideresCard/>
                 </FormGroup>
                 <div className="d-flex justify-content-center">
                 <button className="btn" onClick={handleAceptar}>

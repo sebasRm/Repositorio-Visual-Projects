@@ -89,7 +89,7 @@ return(
        <div className='dropdown-card-tipo col-xs-12 col-sm-12  col-md-12 col-lg-4'>
            <Dropdown  isOpen={dropdown} toggle={toggelDropdown} onClick={()=>dispatch(consutarFacultades())}>
                <DropdownToggle  style={{marginTop:'0.7rem', background:'#163bdd'}}>
-               {nombreDeFacultad.length>0?"Facultad: "+nombreDeFacultad: objProyectos[0].nombreFacultad?objProyectos[0].nombreFacultad:"Por favor selecciones una facultad"}
+               {nombreDeFacultad ? nombreDeFacultad.length>0?"Facultad: "+nombreDeFacultad: objProyectos&& objProyectos[0].nombreFacultad?objProyectos[0].nombreFacultad:"Por favor selecciones una facultad":"pamelo"}
                   
                </DropdownToggle>
                {
@@ -112,7 +112,7 @@ return(
         <div className='col-xs-12 col-sm-12  col-md-12 col-lg-4'>
            
             {
-                nombreDeFacultad.length>0  ? <Dropdown  isOpen={dropdownDos} toggle={toggelDropdownDos} onClick={consutarProgramas(idFacultad)}>
+               nombreDeFacultad&&nombreDeFacultad.length>0  ? <Dropdown  isOpen={dropdownDos} toggle={toggelDropdownDos} onClick={consutarProgramas(idFacultad)}>
                 <DropdownToggle style={{marginTop:'0.7rem'}} >
                     {nombrePrograma?"Programas: "+nombrePrograma: objProyectos[0].nombre_programa&&objProyectos[0].nombre_programa } 
                 </DropdownToggle>

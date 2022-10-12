@@ -7,6 +7,7 @@ import {
     openModalRegistrarDirector,
     openModalEditarLider,
     gestionAddLider,
+    consultarLideres
 } from "../actions/events";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalRegistrarDirector } from "./Modal/ModalRegistrarDirector";
@@ -28,35 +29,19 @@ export const Lideres = ()=>
     const dispatch = useDispatch();
     const {closeNavbar,nombreProyecto,proyecto,idLider,objProyectos}  = useSelector((state) => state);
    //   console.log(objProyectos)
-
+   const { lideres}  = useSelector((state) => state);
     const handleRegistrar =()=>{
     dispatch(openModalRegistrarDirector());
     }
 
-    const [lideres, setLideres] = useState([])
+  
     const [val, setVal] = useState([])
     //console.log(val)
 
 
-    const consultarLideres = async()=>
-    {
-        var formData = new FormData();
-        formData.append('consultar_lideres','');
-        await axios.post
-        (
-            'http://localhost/Apis/lider_proyecto.php',
-            formData
-        ).then((resJson)=>
-        {
-            setLideres(resJson.data.datos);
-             
-        }).catch((error)=>
-        {
-            console.error(error);
-        }); 
-    }
    
-    consultarLideres();
+   
+    dispatch(consultarLideres());
 
     function handleEditarUsuario (event, rowData){
         dispatch(openModalEditarLider())
@@ -78,7 +63,7 @@ export const Lideres = ()=>
                 return resJson.data.datos;    
                 
             }); 
-            setLideres(res);        
+                
             return res;   
          
         }
@@ -203,6 +188,7 @@ return (
     <ModalRegistrarDirector/>
     <ModalEditarLider/>
     </>
+  
   
     
 )

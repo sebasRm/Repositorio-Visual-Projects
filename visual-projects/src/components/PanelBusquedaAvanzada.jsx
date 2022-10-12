@@ -1,12 +1,11 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { useDispatch,useSelector } from "react-redux";
 import "../assets/css/PanelBusquedaAvanzada.css"
 import axios from 'axios'
 import * as Hi from'react-icons/hi'
 
 import {
-  gestionAddFacultades,
-  gestionDeletedFacultades,
+  consutaTipo
 } from "../actions/events";
 import { Dropdown, DropdownToggle,DropdownMenu,DropdownItem } from "reactstrap";
 import { findAllObject } from "../helpers/findObjects";
@@ -16,7 +15,7 @@ import {Link} from 'react-router-dom'
 export const PanelBusquedaAvanzada = () => {
 
   const dispatch = useDispatch();
-  const { tiposFacultades}  = useSelector((state) => state);
+  const {facultad}  = useSelector((state) => state);
   let respuesta=[];
  
   //console.log(programas[0].nombre_programa)
@@ -34,29 +33,16 @@ export const PanelBusquedaAvanzada = () => {
   const toggelDropdownDos =()=>{
     setDropdownDos(!dropdownDos);
   }
-  const [facultad, setFacultad] = useState([])
+
   const [progama, setPrograma] = useState([])
-  console.log(facultad)
-const consutaTipo= async()=> 
-{
-        var formData = new FormData();
-        formData.append('consultasTipo', '');
-        const res = await axios.post(
-          'http://localhost/Apis/proyectos.php',
-          formData
-          )
-          .then((resJson)=>
-          {  
-          setFacultad(resJson.data.datos)
-      }).catch((error)=>
-      {
-          console.error(error);
-      });
-  
-}
-consutaTipo();
+  //console.log(facultad)
+  /*useEffect(() => {
+    dispatch(consutaTipo());
+  }, [facultad]);*/
 
-
+  const handleConsultarFacultades =()=>{
+    dispatch(consutaTipo())
+  }
 
 const consutaProgramas= async(idFacultad)=> 
 {
@@ -101,7 +87,7 @@ const consutaProgramas= async(idFacultad)=>
                     </div>
                 </div>
                 <div className="col-xs-12 col-sm-12  col-md-12 col-lg-2">
-                      <Dropdown  isOpen={dropdown} toggle={toggelDropdown} onClick={consutaTipo}>
+                      <Dropdown  isOpen={dropdown} toggle={toggelDropdown} onClick={handleConsultarFacultades}>
                       <DropdownToggle style=
                       {{background:'#0b2dc4',
                         border:0,
@@ -128,13 +114,13 @@ const consutaProgramas= async(idFacultad)=>
                                   {
                                     facultad ?  facultad.map(facultad =>
                                         <div >
-                                            <DropdownToggle style={{background:'transparent', color:'black', border:0}}>
+                                            <DropdownToggle style={{background:'transparent', color:'black', border:0, width:'20rem',}} className="align-items-left">
                                             <div onMouseOver={(e) => consutaProgramas( facultad.idFacultad )} >
                                             {facultad.nombreFacultad}
                                             </div>
                                             </DropdownToggle>
                                             {
-                                              progama  ? (<DropdownMenu>
+                                              progama  && (<DropdownMenu>
                                                 {
                                                   progama.map(progama => <div>
                                                   <DropdownItem respuesta={facultad.idFacultad}>
@@ -142,7 +128,7 @@ const consutaProgramas= async(idFacultad)=>
                                                 </DropdownItem>
                                                   </div>)
                                                 } 
-                                              </DropdownMenu>):(console.log("nada"))
+                                              </DropdownMenu>)
                                             }
                                     
                                           </div>):(console.log("no deberia hacer nada"))

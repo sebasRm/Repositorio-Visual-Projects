@@ -12,7 +12,10 @@ export const types={
     gestionAddNombreFacultad:"[gestion] guardada todos los datos de los productos del proyecto",
     gestionPrograma:"[gestion] guarda los programas",
     gestionProducto:"[gestion] guarda los programas",
-
+    gestionMetas:"[gestion] guarda las metas",
+    gestionProyectos:"[gestion] guarda para alamcenar todos los proyectos",
+    gestionLideres:"[gestion] almacena todos los lideres",
+    gestionFacultades:"[gestion] almacena todas las facultades",
 
     uiOpenModalRegistrarDirector:"[modal] open modal registrarDirector",
     uiCloseModalRegistrarDirector:"[modal] close modal registrarDirector",

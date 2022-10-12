@@ -90,7 +90,7 @@ export const CrearProyectos=() =>{
                     "success"
                   );
                 
-                  window.location.href="/EdicionProyectos";
+                //  window.location.href="/EdicionProyectos";
                 
             }
             catch(error)

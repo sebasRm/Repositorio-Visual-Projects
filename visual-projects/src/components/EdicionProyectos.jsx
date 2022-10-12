@@ -26,10 +26,7 @@ export const EdicionProyectos =()=>{
    //console.log(objProyectos)
     const [proyectoLider, setProyectoLider] = useState([]);
    dispatch(consutarProductos(objProyectos?.idProyecto))
-
-  
-    
-    
+   
     function handleAsignarLider(){
         dispatch(closeNavbar());
         dispatch(openModalAsignarLider());

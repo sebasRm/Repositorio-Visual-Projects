@@ -110,7 +110,7 @@ import Swal from "sweetalert2"
     return(
         <Modal isOpen={modalRegistrar}>
                 <ModalHeader>
-                    Registrar un nuevo Director
+                    Registrar un nuevo Lider
                 </ModalHeader>
                 <FormGroup>
                 <div className="container ">

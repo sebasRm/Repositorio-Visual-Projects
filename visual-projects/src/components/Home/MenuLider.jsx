@@ -34,8 +34,7 @@ export const MenuLider =()=>{
     ]
   let usuario =JSON.parse(sessionStorage.getItem('usuarioActivo'));
     const [proyectos, setProyectos] = useState([])
-    dispatch(consultarProyectosLider(usuario.idLider_proyecto))
-  
+    dispatch(consultarProyectosLider(usuario.idLider_proyecto));
     const { objProyectos}  = useSelector((state) => state);
         
        // let proyectos =JSON.parse(sessionStorage.getItem('proyectos'));
@@ -43,10 +42,7 @@ export const MenuLider =()=>{
      
         return(  
              <Fragment>
-       
               <Navbar/>
-              
-
               <div className="container-fluid">
               <div className="row">
               

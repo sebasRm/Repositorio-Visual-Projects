@@ -5,14 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiFillLock } from "react-icons/ai"
 import { ModalCrearMeta } from "../Modal/ModalCrearMeta";
 import {
-  
+    consultarMetas,
     consultarProductos
 } from "../../actions/events";
+import Carousel from "react-elastic-carousel";
+import { useEffect}  from "react";
+
 export const CardMetas=()=>{
     const dispatch = useDispatch();
      const [modalCrear, setModalCrear] = useState(false);
-    const { objProyectos}  = useSelector((state) => state);
+    const { objProyectos, metas}  = useSelector((state) => state);
+    useEffect(() => {
+        if (objProyectos) {
+            dispatch(consultarMetas(objProyectos[0].idPlaneacion))
+        } 
+      }, []);
    
+    //dispatch(consultarMetas(objProyectos && objProyectos[0].idPlaneacion))
     function handleModalCrear()
     {
         setModalCrear(!modalCrear)
@@ -24,7 +33,7 @@ export const CardMetas=()=>{
                 objProyectos && objProyectos[0].objetivo? ( 
                     
                     <div className="row">
-                         
+                        
                     <div className='col-xs-12 col-sm-12  col-md-12 col-lg-6'>
                 <div className="card cardTipoProyecto" style={{background:"#6896f82c"}}>
                     <div className="card-head text-center">
@@ -32,6 +41,29 @@ export const CardMetas=()=>{
                         
                     </div>
                      <div className="card-body d-flex justify-content-center">
+                         {
+                             metas && 
+                                <Carousel>
+                            
+                                
+                                        {
+                                            metas.map(meta=> 
+                                            <>
+                                                <div className="card">
+                                                    <div className="card-head">
+                                                    <p> {meta.nombre} </p> 
+                                                    </div>
+                                                    <div className="card-body">
+                                                    <p> {meta.descripcion} </p> 
+                                                </div>
+                                                </div>
+                                           </>
+                                            )
+                                        }
+                              
+                              </Carousel>
+                         }
+                               
                               <button style={{background:'transparent', border:0}} onClick={handleModalCrear}>
                               <IoIosAddCircle size={50} />
                             </button>  

@@ -13,6 +13,14 @@ const initialState ={
 
 export const eventsReducer = (state=initialState, action)=>{
     switch(action.type){
+
+        case types.gestionMetas:
+            
+            case types.gestionProducto:
+                return{
+                    ... state,
+                    metas: action.payload
+             };
         
         case types.gestionProducto:
             return{
@@ -156,6 +164,24 @@ export const eventsReducer = (state=initialState, action)=>{
             closeNavbar:true,
      };
 
+     case types.gestionProyectos:
+        return{
+           ... state,
+           proyectos:action.payload,
+    };
+
+    case types.gestionLideres:
+        return{
+           ... state,
+           lideres:action.payload,
+    };
+
+    case types.gestionFacultades:
+        return{
+           ... state,
+           facultad:action.payload,
+    };
+    
         default:
         return state;
     }

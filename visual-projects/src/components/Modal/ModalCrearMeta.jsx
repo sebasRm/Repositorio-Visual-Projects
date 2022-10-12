@@ -20,7 +20,7 @@ import Carousel from "react-elastic-carousel";
  export const ModalCrearMeta = ({modalCrear, setModalCrear}) =>{
     const dispatch = useDispatch();
     const { objProyectos,producto}  = useSelector((state) => state);
-       console.log(producto)
+    //   console.log(producto)
     //
     function handleCerrar()
     {
@@ -122,7 +122,7 @@ import Carousel from "react-elastic-carousel";
                     }
                     {
                         objProyectos&& objProyectos[0].idMetas &&  
-                        <div className="row justify-content-center">
+                        <div className="row justify-content-center" style={{marginTop:'2rem'}}>
                         <div className="col-xs-12 col-sm-12  col-md-12 col-lg-7 text-center">
                            <div className="card">
                                <div className="card-head text-center"> <h8 style={{color:'white'}}>Productos</h8> </div>
